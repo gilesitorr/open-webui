@@ -1,7 +1,9 @@
 #!/bin/bash
 
-image_name="open-webui"
-container_name="open-webui"
+# image_name="open-webui"
+# container_name="open-webui"
+image_name="open-webui-chenges"
+container_name="open-webui-changes"
 host_port=3000
 container_port=8080
 

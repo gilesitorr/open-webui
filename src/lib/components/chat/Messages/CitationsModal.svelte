@@ -144,14 +144,42 @@
 							</div>
 						{/if}
 					</div>
-					<div class="flex flex-col w-full">
+					<!-- HEre, instead of just showing the content, we will render the original file in an iframe -->
+					<!-- <div class="flex flex-col w-full">
 						<div class=" text-sm font-medium dark:text-gray-300 mt-2">
 							{$i18n.t('Content')}
 						</div>
 						<pre class="text-sm dark:text-gray-400 whitespace-pre-line">
 							{document.document}
 						</pre>
-					</div>
+					</div> -->
+					<!-- Now, show the iframe content -->
+					<div class="flex flex-col w-full">
+						<div class=" text-sm font-medium dark:text-gray-300 mt-2">
+							{$i18n.t('Content')}
+						</div>
+						<iframe
+							src={document?.metadata?.file_id
+								? `/api/v1/files/${document?.metadata?.file_id}/content${document?.metadata?.page !== undefined ? `#page=${document.metadata.page + 1}` : ''}`
+								: document.source?.url?.includes('http')
+									? document.source.url
+									: `#`}
+							class="w-full h-96"
+						></iframe>
+
+					<!-- <div class="flex flex-col w-full">
+						<div class=" text-sm font-medium dark:text-gray-300 mt-2">
+							{$i18n.t('Content')}
+						</div>
+						<iframe
+							src={document?.metadata?.file_id
+								? `/api/v1/files/${document?.metadata?.file_id}/content${document?.metadata?.page !== undefined ? `#page=${document.metadata.page + 1}` : ''}`
+								: document.source?.url?.includes('http')
+									? document.source.url
+									: `#`}
+							class="w-full h-96"
+						></iframe>
+					</div> -->
 
 					{#if documentIdx !== mergedDocuments.length - 1}
 						<hr class=" dark:border-gray-850 my-3" />
